@@ -1,0 +1,9 @@
+package com.cg.lab2.service;
+
+import com.cg.lab2.entity.Trainee;
+
+public interface ITraineeService {
+
+	Trainee add(Trainee trainee);
+	
+}

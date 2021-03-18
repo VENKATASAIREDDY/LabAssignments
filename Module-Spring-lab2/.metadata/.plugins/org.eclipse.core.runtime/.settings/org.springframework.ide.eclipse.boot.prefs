@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.data-jpa=3
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.devtools=3
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.postgresql=3
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.web=3
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.artifactId=Spring-lab3-rest-and-data-jpa-movie
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.bootVersion=2.4.3
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.description=Demo project for Spring Boot
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.groupId=com.cg.lab3
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.javaVersion=1.8
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.language=java
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.name=Spring-lab3-rest-and-data-jpa-movie
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.packageName=com.cg.lab3
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.packaging=war
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.type=GRADLE
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.version=1.0
+org.springframework.ide.eclipse.boot.wizard.initializr.url=https\://start.spring.io\n

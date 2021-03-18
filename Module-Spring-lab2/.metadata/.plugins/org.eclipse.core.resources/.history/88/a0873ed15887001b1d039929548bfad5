@@ -1,0 +1,85 @@
+package com.cg.lab3.service;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cg.lab3.Exception.MoviesException;
+import com.cg.lab3.dao.IMoviesRepository;
+import com.cg.lab3.entity.Category;
+import com.cg.lab3.entity.Movies;
+
+@Service
+public class MovieServiceImpl implements IMoviesService{
+
+	@Autowired
+	private IMoviesRepository moviesRepo;
+	
+	public boolean isValidMovieName(String name){
+		Pattern namePattern = Pattern.compile("[A-Za-z]{3,20}");
+		Matcher nameMatcher = namePattern.matcher(name);
+		
+		return nameMatcher.matches();
+	}
+	public boolean isValidRating(Double rate){
+		return (rate<=5.0 && rate>=1.0);
+	}
+
+	@Override
+	public Movies add(Movies movies) throws MoviesException {
+		if(movies!=null) {
+			if(moviesRepo.existsById(movies.getMovieName())) {
+				throw new MoviesException("Movie "+movies.getMovieName()+" is exists already ");
+			}else if(!isValidMovieName(movies.getMovieName())) {
+				throw new MoviesException("Movie Name Should br only alphanumeric");
+			}else if(!isValidRating(movies.getRating())) {
+				throw new MoviesException("Rating needs to be a number: eg: 2.5. Rating is on scale 1-5");
+			}else {
+				System.out.println(movies.getMovieName());
+				movies=moviesRepo.save(movies);
+			}
+		}
+		return movies;
+	}
+
+	@Override
+	public Movies save(Movies movies) throws MoviesException {
+		Movies old=moviesRepo.findById(movies.getMovieName()).orElse(null);
+		if(old == null) {
+			throw new MoviesException("No Movie "+movies.getMovieName()+" is present");
+		}else if(!isValidMovieName(movies.getMovieName())) {
+			throw new MoviesException("Movie Name Should br only alphanumeric");
+		}else if(!isValidRating(movies.getRating())) {
+			throw new MoviesException("Rating needs to be a number: eg: 2.5. Rating is on scale 1-5");
+		}else{
+			movies=moviesRepo.save(movies);
+		}
+		return movies;
+	}
+
+	@Override
+	public List<Movies> findAll() {
+		return moviesRepo.findAll();
+	}
+
+	@Override
+	public void deleteById(String movieName) {
+		moviesRepo.deleteById(movieName);
+		
+	}
+
+	@Override
+	public Movies findById(String movieName) {
+		return moviesRepo.findById(movieName).orElse(null);
+	}
+
+	@Override
+	public List<Movies> findByCategory(Category category) {
+		return moviesRepo.findByCategory(category);
+	}
+	
+	
+}

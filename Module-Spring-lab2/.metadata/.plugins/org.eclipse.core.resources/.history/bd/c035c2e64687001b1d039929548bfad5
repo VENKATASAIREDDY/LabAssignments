@@ -1,0 +1,5 @@
+package com.cg.lab2.Exception;
+
+public class TraineeException extends Exception {
+
+}

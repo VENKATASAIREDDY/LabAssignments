@@ -1,0 +1,12 @@
+package com.cg.lab3.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cg.lab3.entity.Movies;
+
+public interface IMoviesRepository extends JpaRepository<Movies, Long> {
+
+	boolean existsByTraineeName(String traineeName);
+	
+	Movies findByTraineeName(String traineeName);
+}

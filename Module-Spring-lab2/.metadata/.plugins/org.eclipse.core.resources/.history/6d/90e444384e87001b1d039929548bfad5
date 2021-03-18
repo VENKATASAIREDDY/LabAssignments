@@ -1,0 +1,63 @@
+package com.cg.lab3.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cg.lab2.dao.ITraineeRepository;
+import com.cg.lab2.entity.Trainee;
+import com.cg.lab3.Exception.TraineeException;
+
+@Service
+public class TraineeServiceImpl implements ITraineeService{
+
+	@Autowired
+	private ITraineeRepository traineeRepo;
+
+	@Override
+	public Trainee add(Trainee trainee) throws TraineeException {
+		if(trainee!=null) {
+			if(traineeRepo.existsById(trainee.getTraineeId())) {
+				throw new TraineeException("Trainee with Id "+trainee.getTraineeId()+" is exists already ");
+			}else {
+				trainee=traineeRepo.save(trainee);
+			}
+		}
+		return trainee;
+	}
+
+	@Override
+	public Trainee save(Trainee trainee) throws TraineeException {
+		Trainee oldTrainee=traineeRepo.findById(trainee.getTraineeId()).orElse(null);
+		if(oldTrainee == null) {
+			throw new TraineeException("No Trainee with Id "+trainee.getTraineeId()+" is present");
+		}else {
+			trainee=traineeRepo.save(trainee);
+		}
+		return trainee;
+	}
+
+	@Override
+	public void deleteById(Long traineeId) {
+		traineeRepo.deleteById(traineeId);
+		
+	}
+
+	@Override
+	public Trainee findById(Long traineeId) {
+		return traineeRepo.findById(traineeId).orElse(null);
+	}
+
+	@Override
+	public Trainee findByTraineeName(String traineeName) {
+		return traineeRepo.findByTraineeName(traineeName);
+	}
+
+	@Override
+	public List<Trainee> findAll() {
+		return traineeRepo.findAll();
+	}
+	
+	
+}

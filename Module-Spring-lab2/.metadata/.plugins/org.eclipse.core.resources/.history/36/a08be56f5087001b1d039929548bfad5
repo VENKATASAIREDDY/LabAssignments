@@ -1,0 +1,19 @@
+package com.cg.lab3.service;
+
+import java.util.List;
+
+import com.cg.lab3.Exception.MoviesException;
+import com.cg.lab3.entity.Movies;
+
+public interface IMoviesService {
+
+	Movies add(Movies trainee) throws MoviesException;
+	Movies save(Movies trainee) throws MoviesException;
+	void deleteById(Long traineeId);
+	
+	Movies findById(Long traineeId);
+	Movies findByTraineeName(String traineeName);
+	
+	List<Movies> findAll();
+	
+}

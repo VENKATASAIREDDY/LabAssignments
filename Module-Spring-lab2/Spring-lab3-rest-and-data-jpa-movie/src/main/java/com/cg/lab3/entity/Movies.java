@@ -1,0 +1,56 @@
+package com.cg.lab3.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+
+@Entity
+@Table(name="lab3Movies")
+public class Movies implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	private String movieName;
+	
+
+	private Double rating;
+	
+	@Enumerated(EnumType.STRING)
+	private Category category;
+
+
+	public String getMovieName() {
+		return movieName;
+	}
+
+	public void setMovieName(String movieName) {
+		this.movieName = movieName;
+	}
+
+	public Double getRating() {
+		return rating;
+	}
+
+	public void setRating(Double rating) {
+		this.rating = rating;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	
+	
+
+}

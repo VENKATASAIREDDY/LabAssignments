@@ -1,0 +1,70 @@
+package com.cg.lab2.api;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.lab2.entity.Trainee;
+import com.cg.lab2.service.ITraineeService;
+
+@RestController
+@RequestMapping(path="/emps")
+public class TraineeAPI {
+
+	@Autowired
+	private ITraineeService traineeService;
+	
+	@GetMapping
+	public ResponseEntity<List<Trainee>> findAll(){
+		return new ResponseEntity<>(traineeService.findAll(),HttpStatus.OK);
+	}
+	
+	@GetMapping("/{traineeId:[0-9]{1,9}}")
+	public ResponseEntity<Trainee> findById(@PathVariable("traineeId") Long traineeId){
+		ResponseEntity<Trainee> response=null;
+		
+		Trainee trainee=traineeService.findById(traineeId);
+		
+		if(trainee==null) {
+			response=new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {
+			response=new ResponseEntity<>(trainee,HttpStatus.OK);
+		}
+		return response;
+	}
+	
+	@GetMapping("/{traineeName:[A-Za-z]{3,}}")
+	public ResponseEntity<Trainee> findByTraineeName(@PathVariable("traineeName") String name){
+		ResponseEntity<Trainee> response=null;
+		
+		Trainee trainee=traineeService.findByTraineeName(name);
+		
+		if(trainee==null) {
+			response=new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {
+			response=new ResponseEntity<>(trainee,HttpStatus.OK);
+		}
+		return response;
+	}
+	
+	@DeleteMapping("/{traineeId}")
+	public ResponseEntity<Void> deleteEmployee(@PathVariable("traineeId") Long traineeId) {
+		ResponseEntity<Void> response=null;
+		Trainee trainee=traineeService.findById(traineeId);
+		if(trainee==null) {
+			response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {
+			traineeService.deleteById(traineeId);
+			response = new ResponseEntity<>(HttpStatus.OK);
+		}
+		return response;
+	}
+	
+}

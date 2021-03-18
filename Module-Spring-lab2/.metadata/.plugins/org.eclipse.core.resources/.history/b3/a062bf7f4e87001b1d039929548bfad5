@@ -1,0 +1,12 @@
+package com.cg.lab3.Exception;
+
+public class TraineeException extends Exception {
+
+	
+	private static final long serialVersionUID = 1L;
+	
+	public TraineeException(String mssg) {
+		super(mssg);
+	}
+
+}

@@ -1,0 +1,19 @@
+package com.cg.lab3.service;
+
+import java.util.List;
+
+import com.cg.lab3.Exception.MoviesException;
+import com.cg.lab3.entity.Trainee;
+
+public interface ITraineeService {
+
+	Trainee add(Trainee trainee) throws MoviesException;
+	Trainee save(Trainee trainee) throws MoviesException;
+	void deleteById(Long traineeId);
+	
+	Trainee findById(Long traineeId);
+	Trainee findByTraineeName(String traineeName);
+	
+	List<Trainee> findAll();
+	
+}

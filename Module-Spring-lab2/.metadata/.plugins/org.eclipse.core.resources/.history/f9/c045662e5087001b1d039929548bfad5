@@ -1,0 +1,63 @@
+package com.cg.lab3.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cg.lab3.Exception.MoviesException;
+import com.cg.lab3.dao.IMoviesRepository;
+import com.cg.lab3.entity.Movies;
+
+@Service
+public class TraineeServiceImpl implements ITraineeService{
+
+	@Autowired
+	private IMoviesRepository traineeRepo;
+
+	@Override
+	public Movies add(Movies trainee) throws MoviesException {
+		if(trainee!=null) {
+			if(traineeRepo.existsById(trainee.getTraineeId())) {
+				throw new MoviesException("Trainee with Id "+trainee.getTraineeId()+" is exists already ");
+			}else {
+				trainee=traineeRepo.save(trainee);
+			}
+		}
+		return trainee;
+	}
+
+	@Override
+	public Movies save(Movies trainee) throws MoviesException {
+		Movies oldTrainee=traineeRepo.findById(trainee.getTraineeId()).orElse(null);
+		if(oldTrainee == null) {
+			throw new MoviesException("No Trainee with Id "+trainee.getTraineeId()+" is present");
+		}else {
+			trainee=traineeRepo.save(trainee);
+		}
+		return trainee;
+	}
+
+	@Override
+	public void deleteById(Long traineeId) {
+		traineeRepo.deleteById(traineeId);
+		
+	}
+
+	@Override
+	public Movies findById(Long traineeId) {
+		return traineeRepo.findById(traineeId).orElse(null);
+	}
+
+	@Override
+	public Movies findByTraineeName(String traineeName) {
+		return traineeRepo.findByTraineeName(traineeName);
+	}
+
+	@Override
+	public List<Movies> findAll() {
+		return traineeRepo.findAll();
+	}
+	
+	
+}
