@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="com.cg.sl1.beans.Employee3" id="employee3">
+		<property value="12345" name="employeeId"/>
+		<property value="Harriet" name="employeeName"/>
+		<property value="40000.0" name="salary"/>
+		<property value="30" name="age"/>
+	</bean>
+
+	<bean class="com.cg.sl1.beans.SBU3" id="sbu3">
+		<property value="PES-BU" name="sbuID"/>
+		<property value="Product Engineer Services" name="sbuName"/>
+		<property value="Kiran Rao" name="sbuHead"/>
+		<property name="empList">
+		<list>
+			<bean class="com.cg.sl1.beans.Employee3">
+				<property value="12345" name="employeeId"/>
+				<property value="Harriet" name="employeeName"/>
+				<property value="40000.0" name="salary"/>
+				<property value="30" name="age"/>
+			</bean>
+		
+		
+			<bean class="com.cg.sl1.beans.Employee3">
+				<property value="54321" name="employeeId"/>
+				<property value="teirraH" name="employeeName"/>
+				<property value="160000.0" name="salary"/>
+				<property value="30" name="age"/>
+			</bean>
+		
+		</list>
+
+		</property>
+
+	</bean>
+
+</beans>

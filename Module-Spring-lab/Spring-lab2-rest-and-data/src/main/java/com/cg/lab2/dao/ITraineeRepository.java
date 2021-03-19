@@ -1,0 +1,12 @@
+package com.cg.lab2.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cg.lab2.entity.Trainee;
+
+public interface ITraineeRepository extends JpaRepository<Trainee, Long> {
+
+	boolean existsByTraineeName(String traineeName);
+	
+	Trainee findByTraineeName(String traineeName);
+}
